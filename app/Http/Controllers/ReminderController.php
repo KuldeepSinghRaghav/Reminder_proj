@@ -126,4 +126,15 @@ class ReminderController extends Controller
             return response()->json(['failed'=>"No data found."]);
         }
     }  
+    
+    public function deletedAllCompleted(Request $req)
+    {
+        $data = Reminder::where('status_id','2')->delete();
+        if($data){
+            return response()->json(['success'=>"Deleted successfully."]);
+        }
+        else{
+            return response()->json(['failed'=>"No data found."]);
+        }
+    }  
 }

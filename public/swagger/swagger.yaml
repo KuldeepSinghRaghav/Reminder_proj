@@ -344,6 +344,28 @@ paths:
         '200':
           description: successful operation
         '400':
+
+  /delete_completed:
+    delete:
+      tags:
+        - Reminder Filter
+      summary: delete open data.
+      description: 'This API is for delete completed data from database.'
+      operationId: category3
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        
+      responses:
+        '200':
+          description: successful operation
+        '400':
      
    
         
