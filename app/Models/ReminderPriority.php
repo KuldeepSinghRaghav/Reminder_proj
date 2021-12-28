@@ -7,5 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class ReminderPriority extends Model
 {
-    use HasFactory;
+    protected $table = 'reminderpriorities';
+
 }

@@ -56,7 +56,7 @@ class ReminderController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
         //Request is valid, get reminder data
-        $data = Reminder::all();
+        $data = Reminder::with('cat','priority','status')->get();
         if($data){
             return $data;
         }
