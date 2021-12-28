@@ -1,0 +1,354 @@
+swagger: '2.0'
+info:
+  # description: Created a Reminder App which can be used for day to day updates on important events of the day.
+  # version: 1.0.0
+  title: Project API's
+basePath: /api/
+
+tags:
+  - name: Registration & Authentication
+    description: SignUp & Login
+paths:
+  /register:
+    post:
+      tags:
+        - Registration & Authentication
+      summary: signup
+      description: 'This API is for signup.'
+      operationId: category1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: name
+          password: name
+          type: string
+          required: true  
+        - in: query
+          name: email
+          password: name
+          type: string
+          required: true  
+        - in: query
+          name: password
+          password: name
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request
+  /login:
+    post:
+      tags:
+        - Registration & Authentication
+      summary: Login
+      description: 'This API is for login.'
+      operationId: category2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: email
+          password: name
+          type: string
+          required: true  
+        - in: query
+          name: password
+          password: name
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request   
+          
+          
+  /reset_password_link:
+    post:
+      tags:
+        - Registration & Authentication
+      summary: Reset Password Link
+      description: 'This API is for Reset Password Link.'
+      operationId: category4
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+      
+        - in: query
+          name: email
+          password: name
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+  /reset_password:
+    post:
+      tags:
+        - Registration & Authentication
+      summary: Reset password
+      description: 'This API is for Reset Password.'
+      operationId: category3
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          password: name
+          type: string
+          required: true
+      
+        - in: query
+          name: email
+          password: name
+          type: string
+          required: true 
+
+        - in: query
+          name: password
+          password: name
+          type: string
+          required: true 
+
+        - in: query
+          name: password_confirmation
+          password: name
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+
+# reminder api's
+  /create_reminder:
+    post:
+      tags:
+        - Reminder CURD
+      summary: Create Reminder
+      description: 'This API is for create reminder.date format(Y/M/D)'
+      operationId: category1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true 
+      
+        - in: query
+          name: title_id
+          type: integer
+          required: true 
+
+        - in: query
+          name: description
+          type: string
+          required: true 
+
+        - in: query
+          name: date
+          type: string
+          required: true
+          
+        - in: query
+          name: priority_id
+          type: string
+          required: true
+
+        - in: query
+          name: status_id
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request    
+          
+  /get_reminder:
+    get:
+      tags:
+        - Reminder CURD
+      summary: get Reminder
+      description: 'This API is for getting reminder.'
+      operationId: category2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+  /update_reminder:
+    put:
+      tags:
+        - Reminder CURD
+      summary: Update Reminder
+      description: 'This API is for updating reminder.'
+      operationId: category3
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+          
+        - in: query
+          name: id
+          type: integer
+          required: true
+
+        - in: query
+          name: title_id
+          type: string
+          required: true
+
+        - in: query
+          name: description
+          type: string
+          required: true
+
+        - in: query
+          name: date
+          type: string
+          required: true
+
+        - in: query
+          name: priority_id
+          type: string
+          required: true
+
+        - in: query
+          name: status_id
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+  /delete_reminder/{id}:
+    delete:
+      tags:
+        - Reminder CURD
+      summary: delete Reminder
+      description: 'This API is for delete reminder & you need to fatch the id and token to delete the data. '
+      operationId: category4
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+
+  /find_reminder:
+    post:
+      tags:
+        - Reminder Filter
+      summary: filter data.
+      description: 'This API is for filtring the data from database.'
+      operationId: category1
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: query
+          name: from
+          type: string
+          required: true 
+        - in: query
+          name: to
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+
+  /delete_selected:
+    delete:
+      tags:
+        - Reminder Filter
+      summary: delete filtered data.
+      description: 'This API is for delete filter data from database.'
+      operationId: category2
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: query
+          name: from
+          type: string
+          required: true 
+        - in: query
+          name: to
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+     
+   
+        
+securityDefinitions:
+  api_key:
+    type: apiKey
+    name: Authorization
+    in: header
