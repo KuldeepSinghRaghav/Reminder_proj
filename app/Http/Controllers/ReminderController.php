@@ -67,17 +67,6 @@ class ReminderController extends Controller
 
     public function deletereminder($id)
     {   
-        //Validate data
-        $data = $req->only('token','id');
-        $validator = Validator::make($data, [
-            'token'=>'required',
-            'id'=>'required'
-        ]);
-        //Send failed response if request is not valid
-        if ($validator->fails()) {
-            return response()->json(['error' => $validator->messages()], 200);
-        }
-        //Request is valid, delete data
         $data=Reminder::find($id);
         if($data){
             $data->delete();
@@ -94,6 +83,9 @@ class ReminderController extends Controller
         $data->title_id=$req->title_id;
         $data->description=$req->description;
         $data->date=$req->date;
+        $data->priority_id=$req->priority_id;
+        $data->status_id=$req->status_id;
+
         $result=$data->update();
         if($result){
             return response()->json(['success'=>"update successfully."]);
@@ -102,6 +94,8 @@ class ReminderController extends Controller
             return response()->json(['failed'=>"update failed."]);
         }
     }
+
+    
 
     public function searchByDate(Request $req)
     {
