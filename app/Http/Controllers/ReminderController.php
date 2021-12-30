@@ -58,13 +58,10 @@ class ReminderController extends Controller
         //Request is valid, get reminder data
         // $data = Reminder::with('cat','priority','status')->get();
         $data = Reminder::all();
-
-        if($data){
-            return $data;
-        }
-        else{
+        if(count($data)==0){
             return response()->json(['status'=>"no data found"]);
         }
+        return $data;
     }
 
     public function deletereminder($id)
@@ -75,7 +72,7 @@ class ReminderController extends Controller
             return response()->json(['success'=>"delete successfully."]);
         }
         else{
-            return response()->json(['failed'=>"No data found."]);
+            return response()->json(['status'=>"No data found."]);
         }
     }    
    
@@ -97,18 +94,33 @@ class ReminderController extends Controller
         }
     }
 
-    
-
     public function searchByDate(Request $req)
     {
         $data = Reminder::where('date','>=',$req->from)->where('date','<=',$req->to)->get();
-        $globaldata = $data; 
+        // $globaldata = $data; 
         if($data){
             return $data;
         }
         else{
             return response()->json(['failed'=>"No data found."]);
         }
+    }
+
+    public function allopendata(Request $req)
+    {
+        $data = Reminder::where('status_id','2')->get();
+        if(count($data) != 0){
+            return $data;
+        }
+            return response()->json(['status'=>"No data found."]);
+    }
+    public function allclosedata(Request $req)
+    {
+        $data = Reminder::where('status_id','1')->get();
+        if(count($data) != 0){
+            return $data;
+        }
+            return response()->json(['status'=>"No data found."]);
     }
 
     public function selectDataDelete(Request $req)

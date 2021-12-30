@@ -13,6 +13,8 @@ use ValidationException;
 
 class NewPasswordController extends Controller
 {
+
+
     public function forgotPassword(Request $request)
     {
         $request->validate([
@@ -68,5 +70,10 @@ class NewPasswordController extends Controller
         return response([
             'message'=> __($status)
         ], 500);
+    }
+
+    public function resetwebpage(Request $request)
+    {
+        return $request->token;
     }
 }

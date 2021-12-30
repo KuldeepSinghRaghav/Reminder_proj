@@ -256,35 +256,8 @@ paths:
         '200':
           description: successful operation
         '400':
-          description: Bad request      
-
-  /delete_reminder/{id}:
-    delete:
-      tags:
-        - Reminder CURD
-      summary: delete Reminder
-      description: 'This API is for delete reminder & you need to fatch the id and token to delete the data. '
-      operationId: category4
-      consumes:
-        - application/json
-      produces:
-        - application/json
-      parameters:
-        - in: query
-          name: token
-          type: string
-          required: true
-        - in: path
-          name: id
-          type: integer
-          required: true 
-      responses:
-        '200':
-          description: successful operation
-        '400':
-          description: Bad request      
-
-
+          description: Bad request   
+          
   /find_reminder:
     post:
       tags:
@@ -313,8 +286,77 @@ paths:
         '200':
           description: successful operation
         '400':
+          description: Bad request 
+          
+  /find_open_reminder:
+    get:
+      tags:
+        - Reminder Filter
+      summary: find open reminders.
+      description: 'This API is for filtring the data from database.'
+      operationId: category01
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
           description: Bad request      
 
+  /find_close_reminder:
+    get:
+      tags:
+        - Reminder Filter
+      summary: find close reminders.
+      description: 'This API is for filtring the data from database.'
+      operationId: category02
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
+
+  /delete_reminder/{id}:
+    delete:
+      tags:
+        - Reminder CURD
+      summary: delete Reminder
+      description: 'This API is for delete reminder & you need to fatch the id and token to delete the data. '
+      operationId: category5
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request      
 
   /delete_selected:
     delete:
