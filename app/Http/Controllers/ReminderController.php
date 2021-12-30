@@ -56,7 +56,9 @@ class ReminderController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
         //Request is valid, get reminder data
-        $data = Reminder::with('cat','priority','status')->get();
+        // $data = Reminder::with('cat','priority','status')->get();
+        $data = Reminder::all();
+
         if($data){
             return $data;
         }
@@ -112,7 +114,7 @@ class ReminderController extends Controller
     public function selectDataDelete(Request $req)
     {
        
-        $data = Reminder::where('date','>=',$req->from)->where('date','<=',$req->to)->delete();
+        $data = Reminder::where('date','>=',$req->from)->where('date','<=',$req->to)->where('status_id','2')->delete();
         if($data){
             return response()->json(['success'=>"Deleted successfully."]);
         }
