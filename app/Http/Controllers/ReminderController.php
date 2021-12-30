@@ -10,8 +10,6 @@ use Illuminate\Support\Facades\Validator;
 
 class ReminderController extends Controller
 {
-    
-
     public function createreminder(Request $req)
     {
         //Validate data
@@ -126,7 +124,7 @@ class ReminderController extends Controller
     public function selectDataDelete(Request $req)
     {
        
-        $data = Reminder::where('date','>=',$req->from)->where('date','<=',$req->to)->where('status_id','2')->delete();
+        $data = Reminder::where('date','>=',$req->from)->where('date','<=',$req->to)->delete();
         if($data){
             return response()->json(['success'=>"Deleted successfully."]);
         }
