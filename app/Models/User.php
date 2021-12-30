@@ -63,7 +63,7 @@ class User extends Authenticatable implements JWTSubject
     public function sendPasswordResetNotification($token)
     {
 
-        $url = 'https://spa.test/reset-password?token=' . $token;
+        $url = 'http://127.0.0.1:8000/reset_passwords/?token=' . $token;
 
         $this->notify(new ResetPasswordNotification($url));
     }

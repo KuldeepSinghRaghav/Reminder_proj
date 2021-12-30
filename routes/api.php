@@ -26,6 +26,11 @@ Route::group(['middleware' => ['jwt.verify']], function()
   Route::put('update_reminder',[ReminderController::class,'updatereminder']);
   Route::delete('delete_reminder/{id}',[ReminderController::class,'deletereminder']);
   Route::post('find_reminder',[ReminderController::class,'searchByDate']);
+
+  Route::get('find_open_reminder',[ReminderController::class,'allopendata']);
+  Route::get('find_close_reminder',[ReminderController::class,'allclosedata']);
+
+  
   Route::delete('delete_selected',[ReminderController::class,'selectDataDelete']);
   Route::delete('delete_completed',[ReminderController::class,'deletedAllCompleted']);
 });

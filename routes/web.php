@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\NewPasswordController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,3 +22,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('swagger.index');
 });
+
+Route::get('/reset_passwords',[NewPasswordController::class,'resetwebpage']);
