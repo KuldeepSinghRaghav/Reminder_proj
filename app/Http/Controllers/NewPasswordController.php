@@ -72,8 +72,15 @@ class NewPasswordController extends Controller
         ], 500);
     }
 
-    public function resetwebpage(Request $request)
+    public function resetToken(Request $request)
     {
-        return $request->token;
+       $data = $request->token;
+       if(!$data)
+       {
+        return response([
+          'message'=> 'send request for token'
+        ]);
+
+       }
     }
 }

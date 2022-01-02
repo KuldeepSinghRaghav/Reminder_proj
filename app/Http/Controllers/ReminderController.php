@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
 use App\Models\Reminder;
+use App\Models\Category;
+use App\Models\ReminderPriority;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Controllers\Controller;
+
 
 
 class ReminderController extends Controller
@@ -19,7 +23,6 @@ class ReminderController extends Controller
             'description'=>'required',
             'date'=>'required',
             'priority_id'=>'required',
-            'status_id'=>'required'
         ]);
         //Send failed response if request is not valid
         if ($validator->fails()) {
@@ -31,7 +34,7 @@ class ReminderController extends Controller
         $data->description=$req->description;
         $data->date=$req->date;//y/m/d
         $data->priority_id=$req->priority_id;
-        $data->status_id=$req->status_id;
+        $data->status_id="1";
         $result=$data->save();
 
         if($result){
@@ -54,8 +57,21 @@ class ReminderController extends Controller
             return response()->json(['error' => $validator->messages()], 200);
         }
         //Request is valid, get reminder data
+
         // $data = Reminder::with('cat','priority','status')->get();
-        $data = Reminder::all();
+        // $data = Reminder::all();
+        $data=DB::table('reminders')
+             ->join('categories','categories.id','=','reminders.title_id')
+             ->join('reminderpriorities','reminderpriorities.id','=','reminders.priority_id')
+             ->join('reminderstatus','reminderstatus.id','=','reminders.status_id')
+             ->select('reminders.id','categories.title','reminders.description','reminders.date','reminderpriorities.priority','reminderstatus.status')
+             ->get();
+
+
+        // foreach($data as $item)
+        // {
+        //     return $item->cat->title;
+        // }
         if(count($data)==0){
             return response()->json(['status'=>"no data found"]);
         }
@@ -82,7 +98,6 @@ class ReminderController extends Controller
         $data->date=$req->date;
         $data->priority_id=$req->priority_id;
         $data->status_id=$req->status_id;
-
         $result=$data->update();
         if($result){
             return response()->json(['success'=>"update successfully."]);
@@ -91,6 +106,7 @@ class ReminderController extends Controller
             return response()->json(['failed'=>"update failed."]);
         }
     }
+
 
     public function searchByDate(Request $req)
     {
@@ -143,4 +159,33 @@ class ReminderController extends Controller
             return response()->json(['failed'=>"No data found."]);
         }
     }  
+
+    public function datafordropdown()
+    {
+        $cat = Category::all('id','title');
+        $pri = ReminderPriority::all('id','Priority');
+        return $cat.$pri;     
+    }
+    public function viewReminderUpdatePageStatus($id)
+    {   
+        $data=DB::table('reminders')->where('reminders.id','=',$id)
+        ->join('categories','categories.id','=','reminders.title_id')
+        ->join('reminderpriorities','reminderpriorities.id','=','reminders.priority_id')
+        ->join('reminderstatus','reminderstatus.id','=','reminders.status_id')
+        ->select('reminders.id','categories.title','reminders.description','reminders.date','reminderpriorities.priority','reminderstatus.status')
+        ->get();
+        if(count($data)!=0)
+        {
+          $datas=Reminder::find($id);
+          if($datas->status_id==1)
+          {
+            $datas->status_id="2";
+            $result=$datas->update();
+          }
+         return $data;
+        }
+          else{
+            return response()->json(['failed'=>"No data found."]);
+               }
+    }
 }

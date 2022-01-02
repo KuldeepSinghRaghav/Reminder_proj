@@ -94,6 +94,23 @@ paths:
         '400':
           description: Bad request      
 
+  /get_reset_token:
+    get:
+      tags:
+        - Registration & Authentication
+      summary: Reset Password token
+      description: 'This API is to get Reset Password token.You must send the forgot password link to get token from
+      your mail id.'
+      operationId: category04
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request    
   /reset_password:
     post:
       tags:
@@ -137,12 +154,37 @@ paths:
 
 
 # reminder api's
+
+
+  /reminder_dropdown_data:
+    get:
+      tags:
+        - Reminder CURD
+      summary: Reminder Form Data
+      description: 'This API is for getting dropdown values from db.'
+      operationId: category001
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request    
+
   /create_reminder:
     post:
       tags:
         - Reminder CURD
       summary: Create Reminder
-      description: 'This API is for create reminder.date format(Y/M/D)'
+      description: 'This API is for create reminder.
+      date format(Y/M/D) && title_id must be within 1 to 5'
       operationId: category1
       consumes:
         - application/json
@@ -174,10 +216,6 @@ paths:
           type: string
           required: true
 
-        - in: query
-          name: status_id
-          type: string
-          required: true
       responses:
         '200':
           description: successful operation
@@ -188,7 +226,7 @@ paths:
     get:
       tags:
         - Reminder CURD
-      summary: get Reminder
+      summary: get all reminders from db.
       description: 'This API is for getting reminder.'
       operationId: category2
       consumes:
@@ -205,6 +243,32 @@ paths:
           description: successful operation
         '400':
           description: Bad request      
+
+  /view_reminder/{id}:
+    get:
+      tags:
+        - Reminder CURD
+      summary: status update when we view the the reminder.
+      description: 'This API is for getting data from database and update the status'
+      operationId: category005
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request  
 
   /update_reminder:
     put:
@@ -408,9 +472,7 @@ paths:
         '200':
           description: successful operation
         '400':
-     
-   
-        
+         
 securityDefinitions:
   api_key:
     type: apiKey
