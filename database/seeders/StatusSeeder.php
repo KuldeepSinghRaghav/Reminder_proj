@@ -3,7 +3,8 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use Illuminate\support\facades\DB;
+use DB;
+
 
 
 class StatusSeeder extends Seeder
