@@ -191,12 +191,7 @@ class ReminderController extends Controller
 
     public function viewReminderUpdatePage($id)
     {   
-        $data=DB::table('reminders')->where('reminders.id','=',$id)
-        ->join('categories','categories.id','=','reminders.title_id')
-        ->join('reminderpriorities','reminderpriorities.id','=','reminders.priority_id')
-        ->join('reminderstatus','reminderstatus.id','=','reminders.status_id')
-        ->select('reminders.id','categories.title','reminders.description','reminders.date','reminderpriorities.priority','reminderstatus.status')
-        ->get();
+        $data=Reminder::find($id);
         return $data;
     }
 }
