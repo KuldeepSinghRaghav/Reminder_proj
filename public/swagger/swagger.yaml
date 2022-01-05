@@ -275,9 +275,9 @@ paths:
     get:
       tags:
         - Reminder CURD
-      summary: status update when we view the the reminder.
+      summary: view the the reminder.
       description: 'This API is for getting data from database and update the status'
-      operationId: category005
+      operationId: category0005
       consumes:
         - application/json
       produces:
