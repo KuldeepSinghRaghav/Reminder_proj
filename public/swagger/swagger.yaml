@@ -270,6 +270,33 @@ paths:
         '400':
           description: Bad request  
 
+
+  /view_reminder_by_id/{id}:
+    get:
+      tags:
+        - Reminder CURD
+      summary: status update when we view the the reminder.
+      description: 'This API is for getting data from database and update the status'
+      operationId: category005
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: token
+          type: string
+          required: true
+        - in: path
+          name: id
+          type: integer
+          required: true 
+      responses:
+        '200':
+          description: successful operation
+        '400':
+          description: Bad request  
+
   /update_reminder:
     put:
       tags:
