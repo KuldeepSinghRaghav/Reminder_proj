@@ -29,6 +29,8 @@ Route::group(['middleware' => ['jwt.verify']], function()
   Route::get('reminder_dropdown_data',[ReminderController::class,'datafordropdown']);
   Route::post('create_reminder',[ReminderController::class,'createreminder']);
   Route::get('get_reminder',[ReminderController::class,'getreminder']);
+  
+  Route::get('view_reminder_by_id/{id}',[ReminderController::class,'viewReminderUpdatePage']);
   Route::get('view_reminder/{id}',[ReminderController::class,'viewReminderUpdatePageStatus']);
   Route::put('update_reminder',[ReminderController::class,'updatereminder']);
   Route::delete('delete_reminder/{id}',[ReminderController::class,'deletereminder']);
