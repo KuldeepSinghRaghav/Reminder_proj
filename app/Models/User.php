@@ -63,7 +63,9 @@ class User extends Authenticatable implements JWTSubject
     {
         
 
-        $url = 'http://localhost:3002/resetpassword//?token=' . $token;
+        // $url = 'http://localhost:3002/resetpassword//?token=' . $token;
+        $url = 'http://localhost:3002/resetpassword/' . $token;
+
 
         $this->notify(new ResetPasswordNotification($url));
     }
