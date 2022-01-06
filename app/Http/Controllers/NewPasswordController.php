@@ -31,9 +31,14 @@ class NewPasswordController extends Controller
         }
         else
         {
-            return [
-                'status' => "please enter valid mail id"
-            ];
+            // return [
+            //     'status' => "please enter valid mail id"
+            // ];
+
+            return response()->json([
+                'success' => false,
+                'message' => 'please enter valid mail id',
+            ], 200);
         }
         throw ValidationException::withMessages([
             'email' => [trans($status)],
