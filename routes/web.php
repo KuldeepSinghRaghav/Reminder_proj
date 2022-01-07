@@ -15,10 +15,6 @@ use App\Http\Controllers\ReminderController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
-
 Route::get('/', function () {
     return view('swagger.index');
 });
