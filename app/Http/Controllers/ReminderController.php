@@ -34,7 +34,7 @@ class ReminderController extends Controller
         $data->description=$req->description;
         $data->date=$req->date;//y/m/d
         $data->priority_id=$req->priority_id;
-        $data->status_id="1";
+        $data->status_id="2";
         $result=$data->save();
 
         if($result){

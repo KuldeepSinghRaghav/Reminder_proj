@@ -28,15 +28,15 @@ class JwtMiddleware
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException){
                 return response()->json([
                     'success' => false,
-                    'status' => 'Token is Invalid']);
+                    'status' => 'Token is Invalid'],401);
             }else if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenExpiredException){
                 return response()->json([
                     'success' => false,
-                    'status' => 'Token is Expired']);
+                    'status' => 'Token is Expired'],401);
             }else{
                 return response()->json([
                     'success' => false,
-                    'status' => 'Authorization Token not found']);
+                    'status' => 'Authorization Token not found'],401);
             }
         }
         return $next($request);
